@@ -1,13 +1,23 @@
-import Link from "next/link"
+import axios from "axios";
+import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
 const Home = () => {
+  try {
+    const res = axios.get("http://localhost:5773/");
+  } catch (error) {}
   return (
-    <div className='bg-cover bg-gradient-to-tr from-20% from-blue-800 via-60% via-cyan-400 to-95% to-purple-900 min-h-screen flex items-center justify-center'>
-      <h1 className='text-7xl font-extrabold font-mono capitalize'>welcome to the smart store</h1>
-      <Link href={'/signup'}></Link>
-      <Link href={'/login'}></Link>
-    </div>
-  )
-}
+    <>
+      <Navbar />
+      <div className="bg-cover bg-gradient-to-tr from-20% from-blue-800 via-60% via-cyan-400 to-95% to-purple-900 min-h-screen flex items-center justify-center">
+        <h1 className="text-7xl font-extrabold font-mono capitalize">
+          welcome to the smart store
+        </h1>
+        <Link href="/signup" className="bg-red-500"></Link>
+        <Link href="/login" className="bg-red-500"></Link>
+      </div>
+    </>
+  );
+};
 
-export default Home
+export default Home;

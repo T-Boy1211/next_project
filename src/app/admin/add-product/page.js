@@ -2,6 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Image from "next/image";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const initialValues = {
   image: null,
@@ -32,13 +33,22 @@ const product = [
 
 const AddProduct = () => {
   const handleSubmit = async (values) => {
-    const res = await axios.post('http://localhost:5773/admin/add-product', values, {
-      headers: {
-        "Content-Type": "multipart/form-data"
+    try {
+      const res = await axios.post('http://localhost:5773/admin/add-product', values, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+      toast.success(res.data.message)
+      const token = res.data.token
+      localStorage.getItem(token)
+      if (!token) {
+        
       }
-    });
-    console.log("Form Data:", values);
-  };
+    } catch (error) {
+      toast.error(error.response.data.message || 'Product failed')
+    } 
+  }
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-xl">

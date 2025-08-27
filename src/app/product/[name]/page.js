@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import React from 'react'
-Image
 
 const Name = ({ image, name, price, description, features, cartegory, addToCart }) => {
   return (

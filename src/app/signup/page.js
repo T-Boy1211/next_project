@@ -8,7 +8,8 @@ import { jwtDecode } from "jwt-decode";
 
 const Signup = () => {
   const validationSchema = Yup.object({
-    userName: Yup.string().required("Required"),
+    firstName: Yup.string().required("Required"),
+    lastName: Yup.string().required("Required"),
     email: Yup.string().required("Required").email("Invalid email"),
     password: Yup.string()
       .required("Required")

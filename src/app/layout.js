@@ -19,8 +19,6 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body>
-        {/* Wrap with ServiceWorkerProvider (client component) */}
-        {/* <ServiceWorkerProvider /> */}
         {children}
         <Toaster position="top-right" reverseOrder={false} />
       </body>
