@@ -1,3 +1,5 @@
+'use client'
+
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Image from "next/image";
@@ -19,16 +21,18 @@ const validationSchema = Yup.object({
   price: Yup.number().required("Price is required"),
   category: Yup.string().required("Category is required"),
   description: Yup.string().required("Description is required"),
-  features: Yup.array().of(Yup.string()),
+  features: Yup.array().of(Yup.string()).required('features are required'),
+  brand: Yup.string().required('brand is required'),
 });
 
 const product = [
   "image",
   "name",
   "price",
-  "features",
   "category",
   "description",
+  "features",
+  'brand'
 ];
 
 const AddProduct = () => {
@@ -42,17 +46,14 @@ const AddProduct = () => {
       toast.success(res.data.message)
       const token = res.data.token
       localStorage.getItem(token)
-      if (!token) {
-        
-      }
     } catch (error) {
       toast.error(error.response.data.message || 'Product failed')
     } 
   }
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-xl">
-      <h2 className="text-xl font-bold mb-4">Add Product</h2>
+    <div className="p-6 bg-gray-700 shadow-lg bg-cover min-h-screen">
+      <h2 className="text-xl font-extrabold mb-4 md:text-center md:text-3xl">Add Product</h2>
 
       <Formik
         initialValues={initialValues}
@@ -71,7 +72,7 @@ const AddProduct = () => {
                       onChange={(event) =>
                         setFieldValue("image", event.currentTarget.files[0])
                       }
-                      className="border p-2 rounded w-full"
+                      className="border p-2 rounded-3xl w-full"
                     />
                     {values.image && (
                       <div className="mt-2">
@@ -80,25 +81,25 @@ const AddProduct = () => {
                           alt="Preview"
                           width={100}
                           height={100}
-                          className="rounded"
+                          className="rounded-xl"
                         />
                       </div>
                     )}
                   </>
                 ) : PF === "features" ? (
                   <div>
-                    <label className="block font-medium">Features</label>
+                    {/* <label className="block font-medium">Features</label> */}
                     {values.features.map((feature, index) => (
                       <div key={index} className="flex gap-2 mb-2">
                         <Field
                           type="text"
                           name={`features[${index}]`}
-                          placeholder={`Feature ${index + 1}`}
-                          className="border p-2 rounded w-full"
+                          placeholder={`feature ${index + 1}`}
+                          className="border p-2 rounded-3xl w-full"
                         />
                         <button
                           type="button"
-                          className="bg-red-500 text-white px-2 rounded"
+                          className="text-red-500 px-2 rounded-4xl"
                           onClick={() => {
                             const newFeatures = [...values.features];
                             newFeatures.splice(index, 1);
@@ -111,7 +112,7 @@ const AddProduct = () => {
                     ))}
                     <button
                       type="button"
-                      className="bg-blue-500 text-white px-3 py-1 rounded"
+                      className="bg-blue-500 text-white px-3 py-1 rounded-3xl"
                       onClick={() =>
                         setFieldValue("features", [...values.features, ""])
                       }
@@ -124,7 +125,7 @@ const AddProduct = () => {
                     type="text"
                     name={PF}
                     placeholder={PF}
-                    className={`border p-2 rounded w-full ${
+                    className={`border p-2 rounded-3xl w-full ${
                       touched[PF] && errors[PF]
                         ? "border-red-500"
                         : "border-gray-300"
@@ -135,14 +136,14 @@ const AddProduct = () => {
                 <ErrorMessage
                   name={PF}
                   component="span"
-                  className="text-red-500 text-sm"
+                  className="text-red-500 text-sm italic"
                 />
               </div>
             ))}
 
             <button
               type="submit"
-              className="w-full bg-green-600 text-white p-2 rounded mt-4"
+              className="w-full bg-green-600 text-white p-2 rounded-4xl mt-4"
             >
               Add Product
             </button>

@@ -1,13 +1,29 @@
-import Image from 'next/image'
-import React from 'react'
+import axios from "axios";
+import Image from "next/image";
+import React, { useEffect } from "react";
 
-const Name = ({ image, name, price, description, features, cartegory, addToCart }) => {
+const Name = ({
+  image,
+  name,
+  price,
+  description,
+  features,
+  cartegory,
+  addToCart,
+}) => {
+  useEffect(() => {
+    const res = axios.get("http://localhost:5773/product/:name");
+    const token = res.data.token;
+    localStorage.getItem(token);
+    token ? "" : "";
+    return () => {
+      second
+    }
+  }, [])
+
   return (
     <div>
-      <Image
-        src={image}
-        alt={name}
-      />
+      <Image src={image} alt={name} />
       <p>{price}</p>
       <p>{cartegory}</p>
       <p>{description}</p>
@@ -19,7 +35,7 @@ const Name = ({ image, name, price, description, features, cartegory, addToCart 
       </table>
       <button onClick={addToCart}>Add to Cart</button>
     </div>
-  )
-}
+  );
+};
 
-export default Name
+export default Name;

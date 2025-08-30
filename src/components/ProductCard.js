@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-const ProductCard = ({ image, name, price, description, addCart }) => {
+const ProductCard = ({ image, name, price, categpry, description, features, addCart }) => {
   return (
     <div>
       <Image
