@@ -11,7 +11,7 @@ const AdminBoard = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get('http://localhost:5773/admin/adminBoard');
-        const apiToken = res?.data?.token;
+        const apiToken = await res?.data?.token;
         setToken(apiToken || null);
         if (apiToken) {
           localStorage.setItem('token', apiToken);
