@@ -1,6 +1,6 @@
 'use client'
 
-import axios from "axios";
+// import axios from "axios";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 

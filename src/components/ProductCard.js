@@ -1,7 +1,9 @@
+'use client'
+
 import Image from 'next/image'
 import React from 'react'
 
-const ProductCard = ({ image, name, price, categpry, description, features, addCart }) => {
+const ProductCard = ({ image, name, price, category, description, features, addCart }) => {
   return (
     <div>
       <Image

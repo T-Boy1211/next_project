@@ -1,3 +1,5 @@
+'use client';
+
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect } from "react";
@@ -8,14 +10,17 @@ const Name = ({
   price,
   description,
   features,
-  cartegory,
+  category,
   addToCart,
 }) => {
   useEffect(() => {
-    const res = axios.get("http://localhost:5773/product/:name");
-    const token = res.data.token;
+    const handleToken = async () => {
+      const res = await axios.get("http://localhost:5773/product/:name");
+      const token = await res.data.token;
     localStorage.getItem(token);
     token ? "" : "";
+    }
+    handleToken();
     return () => {
       second
     }

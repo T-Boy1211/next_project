@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -73,22 +73,21 @@ const AddProduct = () => {
                         setFieldValue("image", event.currentTarget.files[0])
                       }
                       className="border p-2 rounded-3xl w-full"
-                    />
+                      />
                     {values.image && (
-                      <div className="mt-2">
+                      <div className="mt-5">
                         <Image
                           src={URL.createObjectURL(values.image)}
                           alt="Preview"
-                          width={100}
-                          height={100}
+                          width={200}
+                          height={200}
                           className="rounded-xl"
-                        />
+                          />
                       </div>
                     )}
                   </>
                 ) : PF === "features" ? (
                   <div>
-                    {/* <label className="block font-medium">Features</label> */}
                     {values.features.map((feature, index) => (
                       <div key={index} className="flex gap-2 mb-2">
                         <Field

@@ -9,7 +9,8 @@ function Profile() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const fetchUserProfile = async () => {
+      const token = localStorage.getItem("token");
 
     if (!token) {
       console.log("⚠️ No token found. Redirect to login.");
@@ -19,7 +20,7 @@ function Profile() {
     const decoded = jwtDecode(token);
     console.log("Decoded Token:", decoded);
 
-    axios
+    await axios
       .get("http://localhost:5773/user/:username", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -31,6 +32,8 @@ function Profile() {
       .catch((err) => {
         console.error("Error fetching profile:", err);
       });
+    };
+    fetchUserProfile();
   }, []);
 
   if (!user) return <p className="text-center mt-10">Loading profile...</p>;
